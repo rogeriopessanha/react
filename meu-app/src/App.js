@@ -17,6 +17,7 @@ function App() {
 
       <Bemvindo nome="Rogerio" idade="35"/>
       <Bemvindo nome="Maria" idade="20"/>
+      <Bemvindo nome="João" idade="50"/>
 
     </div>
   )
