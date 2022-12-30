@@ -16,7 +16,7 @@ function App() {
       Olá Mundo!
 
       <Bemvindo nome="Rogerio" idade="35"/>
-      <Bemvindo nome="Maria" idade="70"/>
+      <Bemvindo nome="Maria" idade="20"/>
 
     </div>
   )
