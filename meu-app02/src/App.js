@@ -29,7 +29,7 @@ class Sobre extends Component {
 const Social = () => {
   return (
     <div>
-      <a href="#">Facebook</a>
+      <a>Facebook</a>
       <a>Twitter</a>
     </div>
   )
