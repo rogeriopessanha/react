@@ -1,20 +1,22 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
-class Equipe extends Component{
-  render(){
-    return(
+class Equipe extends Component {
+  render() {
+    return (
       <div>
-      
-        <Sobre nome={this.props.nome} cargo={this.props.cargo} idade={this.props.idade}/>
-        <hr/>
+
+        <Sobre nome={this.props.nome} cargo={this.props.cargo} idade={this.props.idade} />
+
+        <Social />
+        <hr />
       </div>
     )
   }
 }
 
-class Sobre extends Component{
-  render(){
-    return(
+class Sobre extends Component {
+  render() {
+    return (
       <div>
         <h2>Olá eu sou o(a){this.props.nome}</h2>
         <h3>Meu cargo: {this.props.cargo}</h3>
@@ -24,14 +26,23 @@ class Sobre extends Component{
   }
 }
 
+const Social = () => {
+  return (
+    <div>
+      <a href="#">Facebook</a>
+      <a>Twitter</a>
+    </div>
+  )
+}
 
-function App(){
-  return(
+
+function App() {
+  return (
     <div>
       <h1>Conheça nossa equipe</h1>
-      <Equipe nome="Rogerio" cargo="Desenvolvedor" idade="35"/>
-      <Equipe nome="João" cargo="Analista" idade="60"/>
-      <Equipe nome="Maria" cargo="Tech Recruit" idade="42"/>
+      <Equipe nome="Rogerio" cargo="Desenvolvedor" idade="35" />
+      <Equipe nome="João" cargo="Analista" idade="60" />
+      <Equipe nome="Maria" cargo="Tech Recruit" idade="42" />
     </div>
   );
 }
