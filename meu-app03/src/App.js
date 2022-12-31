@@ -9,11 +9,33 @@ class App extends Component {
     this.state = {
       nome: "Rogerio",
       contador: 0
-    }
+    };
+
+    this.aumentar = this.aumentar.bind(this);
+    this.diminuir = this.diminuir.bind(this);
+
   }
 
   aumentar(){
-    console.log('Aumentou')
+    let state = this.state;
+    state.contador += 1;
+    state.nome = 'Joao'
+    this.setState(state)
+
+  }
+
+  diminuir(){
+    let state = this.state;
+
+
+    if (state.contador === 0) {
+      alert('Ops, chegou a zero...')
+      return
+    }
+
+    state.contador -= 1;
+
+    this.setState(state)
   }
 
   render() {
@@ -22,10 +44,11 @@ class App extends Component {
 
         <h1>Contador</h1>
 
+          {this.state.nome}
         <h3>
-          <button>-</button> 
+          <button onClick={this.diminuir} >-</button> 
           {this.state.contador} 
-          <button onclick={this.aumentar}>+</button>
+          <button onClick={this.aumentar} >+</button>
         </h3>
 
       </div>
