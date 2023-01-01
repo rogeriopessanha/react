@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 
 class App extends Component {
 
-
   constructor(props) {
     super(props)
     this.state = {
@@ -13,7 +12,6 @@ class App extends Component {
 
     this.aumentar = this.aumentar.bind(this);
     this.diminuir = this.diminuir.bind(this);
-
   }
 
   aumentar(){
@@ -21,12 +19,10 @@ class App extends Component {
     state.contador += 1;
     state.nome = 'Joao'
     this.setState(state)
-
   }
 
   diminuir(){
     let state = this.state;
-
 
     if (state.contador === 0) {
       alert('Ops, chegou a zero...')
