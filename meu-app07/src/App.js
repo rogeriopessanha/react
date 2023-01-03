@@ -8,9 +8,9 @@ class App extends Component{
     this.state = {
       feed:[
         {id: 1, username: 'Rogerio', curtidas: 1, comentarios: 0},
-        {id: 2, username: 'Gaia', curtidas: 120, comentarios: 24},
-        {id: 3, username: 'Isabel', curtidas: 99, comentarios: 18},
-        {id: 4, username: 'Maria', curtidas: 210, comentarios: 55}
+        {id: 2, username: 'Gaia', curtidas: 100, comentarios: 84},
+        {id: 3, username: 'Isabel', curtidas: 115, comentarios: 18},
+        {id: 4, username: 'Maria', curtidas: 210, comentarios: 35}
       ]
     }
 

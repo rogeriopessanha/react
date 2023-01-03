@@ -9,10 +9,10 @@ class Feed extends Component {
                 <h3>{this.props.username} tem : 
 
                     <a>
-                        {this.props.curtidas > 1 ? this.props.curtidas + ' curtidas ' : this.props.curtidas + ' curtida '} e
+                        {this.props.curtidas > 1 ? this.props.curtidas + ' curtidas ' : this.props.curtidas + ' curtida '} /
                         {this.props.comentarios > 1 ? this.props.comentarios + ' comentarios ' : this.props.comentarios + ' comentario '}
+                        <hr/>
                     </a>
-
                 </h3>
             </div>
         )
