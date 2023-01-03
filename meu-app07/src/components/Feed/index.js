@@ -3,10 +3,17 @@ import React, { Component } from 'react'
 class Feed extends Component {
     render() {
         return (
-           
+
             <div key={this.props.id}>
-              <h3>{this.props.username} tem: <a>{this.props.curtidas} Curtidas e {this.props.comentarios} Comentarios</a></h3>
-              <hr/>
+
+                <h3>{this.props.username} tem : 
+
+                    <a>
+                        {this.props.curtidas > 1 ? this.props.curtidas + ' curtidas ' : this.props.curtidas + ' curtida '} e
+                        {this.props.comentarios > 1 ? this.props.comentarios + ' comentarios ' : this.props.comentarios + ' comentario '}
+                    </a>
+
+                </h3>
             </div>
         )
     }
