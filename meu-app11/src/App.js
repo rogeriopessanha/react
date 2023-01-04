@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState} from 'react'
+
+////https://sujeitoprogramador.com/rn-api/?api=posts
 
 function App() {
+
+  const [nutri, setNutri] = useState([])
+
+  useEffect(() =>{
+
+    function loadApi(){
+      let url ='https://sujeitoprogramador.com/rn-api/?api=posts'
+      
+      fetch(url)
+      .then((r) => r.json())
+      .then((json) =>{
+        
+      })
+    }
+
+    loadApi()
+
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+
     </div>
   );
 }
