@@ -13,7 +13,7 @@ function Home() {
 
         <hr/> <br/>
 
-        <Link to='/produto/123'>Acessar Produto 123</Link>
+        <Link to='/produto/12345'>Acessar Produto 12345</Link>
       </div>
     );
   }
