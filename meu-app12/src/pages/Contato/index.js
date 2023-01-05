@@ -1,17 +1,17 @@
 
 import { Link } from "react-router-dom";
 
-function Sobre() {
+function Contato() {
     return (
       <div>
-        <h1>Pagina Sobre a empresa</h1>
+        <h1>Página Contato</h1>
         <br/>
 
         <Link to='/'>Home</Link>
         <br/>
-        <Link to='/contato'>Contato</Link>
+        <Link to='/sobre'>Sobre</Link>
       </div>
     );
   }
   
-  export default Sobre;
+  export default Contato;
