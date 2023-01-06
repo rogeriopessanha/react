@@ -1,9 +1,10 @@
 
+import { db} from './firebaseConnection'
 
 function App() {
   return (
-    <div className="App">
-      
+    <div>
+      <h1>testando</h1>
     </div>
   );
 }
