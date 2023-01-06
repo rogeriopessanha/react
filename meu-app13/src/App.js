@@ -11,7 +11,7 @@ function App() {
   const [autor, setAutor] = useState('')
 
   async function handleAdd() {
-    await setDoc(doc(db, "posts", 123456), {
+    await setDoc(doc(db, "posts", "123456"), {
       titulo: titulo,
       autor: autor,
     })
