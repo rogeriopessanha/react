@@ -1,8 +1,9 @@
 
 import { useState } from 'react';
 import { db} from './firebaseConnection'
-import { doc, setDoc, collection, addDoc, getDoc, getDocs} from 'firebase/firestore'
+import { doc, setDoc, collection, addDoc, getDoc, getDocs, updateDoc, deleteDoc} from 'firebase/firestore'
 import './app.css'
+import { async } from '@firebase/util';
 // import { async } from '@firebase/util';
 // import { async } from '@firebase/util';
 
@@ -10,6 +11,7 @@ function App() {
 
   const [titulo, setTitulo] = useState('')
   const [autor, setAutor] = useState('')
+  const [idPost, setIdPost] = useState('')
 
   const [posts, setPosts] = useState([])
 
@@ -78,29 +80,63 @@ function App() {
     })
   }
 
+  async function editarPost() {
+    const docRef = doc(db, "posts", idPost)
+
+    await updateDoc(docRef, {
+      titulo: titulo, 
+      autor: autor
+    })
+
+    .then(() =>{
+      console.log('post atualizado com sucesso')
+      setIdPost('')
+      setTitulo('')
+      setAutor('')
+    })
+
+    .catch(() =>{
+      console.log('erro ao atualizar o post')
+    })
+  }
+
+  async function excluirPost (id) {
+    const docRef = doc(db, "posts", id)
+    await deleteDoc(docRef)
+    .then(() =>{
+      alert('Post deletado com sucesso')
+    })
+  }
+
   return (
     <div>
-      <h1>testando ;) </h1>
+      <h1>ReactJS + Firebase </h1>
 
       <div className="container">
-        <label>Titulo:</label> <br/>
 
+        <label>ID do Post:</label>
+        <input type="text" placeholder='Digite o ID do post' value={idPost} onChange={(e) => setIdPost(e.target.value)}/> <br/>
+
+        <label>Titulo:</label> 
         <textarea type="text" placeholder='Digite seu titulo' value={titulo} onChange={(e) => setTitulo(e.target.value)}/> <br/>
 
-        <label>Autor:</label> <br/>
-
+        <label>Autor:</label> 
         <input type="text" placeholder='Autor do post' value={autor} onChange={(e) => setAutor(e.target.value)} /> <br/>
 
-        <button onClick={handleAdd}>Cadastrar</button>
+        <button onClick={handleAdd}>Cadastrar</button> <br/>
 
-        <button onClick={buscarPosts}>Buscar postes</button>
+        <button onClick={buscarPosts}>Buscar postes</button> <br/>
+
+        <button onClick={editarPost}>Atualizar post</button>
 
         <ul>
           {posts.map((post) =>{
             return(
               <li key={post.id}>
-                <span>Titulo: {post.titulo}</span>
-                <span>Autor: {post.autor}</span>
+                <strong>ID: {post.id}</strong> <br/>
+                <span>Titulo: {post.titulo}</span> <br/>
+                <span>Autor: {post.autor}</span> <br/>
+                <button onClick={() => excluirPost(post.id)}>Excluir</button> <br/> <br/>
               </li>
             )
           })}
