@@ -1,19 +1,23 @@
 
 import { useState, useEffect } from 'react';
-import { db, auth} from './firebaseConnection'
-import { 
-  doc, 
-  setDoc, 
-  collection, 
-  addDoc, 
-  getDoc, 
-  getDocs, 
-  updateDoc, 
+import { db, auth } from './firebaseConnection'
+import {
+  doc,
+  setDoc,
+  collection,
+  addDoc,
+  getDoc,
+  getDocs,
+  updateDoc,
   deleteDoc,
-  onSnapshot
+  onSnapshot,
 } from 'firebase/firestore'
 
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword, signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+} from 'firebase/auth';
 
 import './app.css'
 import { async } from '@firebase/util';
@@ -29,32 +33,50 @@ function App() {
   const [senha, setSenha] = useState('')
 
   const [user, setUser] = useState(false)
-  const [userDetail, setUserDetail] =useState({})
+  const [userDetail, setUserDetail] = useState({})
 
   const [posts, setPosts] = useState([])
 
   useEffect(() => {
     async function loadPosts() {
-      const unSub = onSnapshot(collection(db, 'posts'), (snapshot) =>{
+      const unSub = onSnapshot(collection(db, 'posts'), (snapshot) => {
 
         let listaPost = []
 
-      snapshot.forEach((doc) =>{
-        listaPost.push({
-          id: doc.id,
-          titulo: doc.data().titulo,
-          autor: doc.data().autor,
+        snapshot.forEach((doc) => {
+          listaPost.push({
+            id: doc.id,
+            titulo: doc.data().titulo,
+            autor: doc.data().autor,
 
+          })
         })
-      })
 
-      setPosts(listaPost)
+        setPosts(listaPost)
 
       })
     }
 
     loadPosts()
   })
+
+  useEffect(() =>{
+    async function checkLogin() {
+      onAuthStateChanged(auth, (user) =>{
+        if (user) {
+          //se tem usuario logado ele entra aqui
+          console.log(user)
+        }else{
+          //se nao possui nenhum user logado
+          setUser(false)
+          setUserDetail({})
+        }
+      })
+    }
+
+    checkLogin()
+    
+  }, [])
 
   async function handleAdd() {
     // await setDoc(doc(db, "posts", "123456"), {
@@ -69,19 +91,19 @@ function App() {
     //   console.log("deu erro" + error)
     // })
 
-    await addDoc(collection(db, "posts"),{
+    await addDoc(collection(db, "posts"), {
       titulo: titulo,
       autor: autor,
     })
-    .then(() =>{
-      console.log("cadastrado com sucesso")
-      setAutor('')
-      setTitulo('')
-    })
+      .then(() => {
+        console.log("cadastrado com sucesso")
+        setAutor('')
+        setTitulo('')
+      })
 
-    .catch((error) =>{
-      console.log("deu erro" + error)
-    })
+      .catch((error) => {
+        console.log("deu erro" + error)
+      })
   }
 
   async function buscarPosts() {
@@ -100,92 +122,92 @@ function App() {
 
     const postRef = collection(db, "posts")
     await getDocs(postRef)
-    .then((snapshot) => {
-      let lista = []
+      .then((snapshot) => {
+        let lista = []
 
-      snapshot.forEach((doc) =>{
-        lista.push({
-          id: doc.id,
-          titulo: doc.data().titulo,
-          autor: doc.data().autor,
+        snapshot.forEach((doc) => {
+          lista.push({
+            id: doc.id,
+            titulo: doc.data().titulo,
+            autor: doc.data().autor,
 
+          })
         })
+
+        setPosts(lista)
+
       })
 
-      setPosts(lista)
-
-    })
-
-    .catch((error) =>{
-      console.log('deu algum erro na busca!')
-    })
+      .catch((error) => {
+        console.log('deu algum erro na busca!')
+      })
   }
 
   async function editarPost() {
     const docRef = doc(db, "posts", idPost)
 
     await updateDoc(docRef, {
-      titulo: titulo, 
+      titulo: titulo,
       autor: autor
     })
 
-    .then(() =>{
-      console.log('post atualizado com sucesso')
-      setIdPost('')
-      setTitulo('')
-      setAutor('')
-    })
+      .then(() => {
+        console.log('post atualizado com sucesso')
+        setIdPost('')
+        setTitulo('')
+        setAutor('')
+      })
 
-    .catch(() =>{
-      console.log('erro ao atualizar o post')
-    })
+      .catch(() => {
+        console.log('erro ao atualizar o post')
+      })
   }
 
-  async function excluirPost (id) {
+  async function excluirPost(id) {
     const docRef = doc(db, "posts", id)
     await deleteDoc(docRef)
-    .then(() =>{
-      alert('Post deletado com sucesso')
-    })
+      .then(() => {
+        alert('Post deletado com sucesso')
+      })
   }
 
   async function novoUsuario() {
     await createUserWithEmailAndPassword(auth, email, senha)
-    .then(() =>{
-      console.log('cadastrado com sucesso')
-      setEmail('')
-      setSenha('')
-    })
-    .catch((error) =>{
-      if(error.code === 'auth/weak-password'){
-        alert('senha muito fraca.')
-      }else if(error.code === 'auth/email-already-in-use'){
-        alert('email já existe')
-      }
-    })
+      .then(() => {
+        console.log('cadastrado com sucesso')
+        setEmail('')
+        setSenha('')
+      })
+      .catch((error) => {
+        if (error.code === 'auth/weak-password') {
+          alert('senha muito fraca.')
+        } else if (error.code === 'auth/email-already-in-use') {
+          alert('email já existe')
+        }
+      })
   }
 
   async function logarUsuario() {
     await signInWithEmailAndPassword(auth, email, senha)
-    .then((value) =>{
-      console.log('logado com sucesso')
-      console.log(value.user)
+      .then((value) => {
+        console.log('logado com sucesso')
+        console.log(value.user)
 
-      setUserDetail({
-        uid: value.user.uid,
-        email: value.user.email,
+        setUserDetail({
+          uid: value.user.uid,
+          email: value.user.email,
+        })
+
+        setUser(true)
+
+
+        setEmail('')
+        setSenha('')
       })
 
-      setUser(true)
-
-
-      setEmail('')
-      setSenha('')
-    })
-
-    .catch(() =>{
-      console.log('deu erro no login')
-    })
+      .catch(() => {
+        console.log('deu erro no login')
+      })
   }
 
   async function fazerLogout() {
@@ -198,10 +220,10 @@ function App() {
     <div>
       <h1>ReactJS + Firebase </h1>
 
-      { user && (
+      {user && (
         <div>
-          <strong>Seja bem-vindo(você está logado)</strong> <br/>
-          <span>ID: {userDetail.uid} - Email:{userDetail.email}</span> <br/>
+          <strong>Seja bem-vindo(você está logado)</strong> <br />
+          <span>ID: {userDetail.uid} - Email:{userDetail.email}</span> <br />
           <button onClick={fazerLogout}>Sair da conta</button>
         </div>
       )}
@@ -210,44 +232,44 @@ function App() {
       <div className="container">
         <h2>Usuarios</h2>
         <label>Email</label>
-        <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Digite seu email'/> <br/>
+        <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Digite seu email' /> <br />
 
         <label>Senha</label>
-        <input value={senha} onChange={(e) => setSenha(e.target.value)} placeholder='Informe sua senha'/> <br/>
+        <input value={senha} onChange={(e) => setSenha(e.target.value)} placeholder='Informe sua senha' /> <br />
       </div>
 
-      <button onClick={novoUsuario}>Cadastrar</button> <br/>
+      <button onClick={novoUsuario}>Cadastrar</button> <br />
       <button onClick={logarUsuario}>Fazer login</button>
-      <br/> 
-      <hr/>
+      <br />
+      <hr />
 
 
 
       <div className="container">
         <h2>POSTS</h2>
         <label>ID do Post:</label>
-        <input type="text" placeholder='Digite o ID do post' value={idPost} onChange={(e) => setIdPost(e.target.value)}/> <br/>
+        <input type="text" placeholder='Digite o ID do post' value={idPost} onChange={(e) => setIdPost(e.target.value)} /> <br />
 
-        <label>Titulo:</label> 
-        <textarea type="text" placeholder='Digite seu titulo' value={titulo} onChange={(e) => setTitulo(e.target.value)}/> <br/>
+        <label>Titulo:</label>
+        <textarea type="text" placeholder='Digite seu titulo' value={titulo} onChange={(e) => setTitulo(e.target.value)} /> <br />
 
-        <label>Autor:</label> 
-        <input type="text" placeholder='Autor do post' value={autor} onChange={(e) => setAutor(e.target.value)} /> <br/>
+        <label>Autor:</label>
+        <input type="text" placeholder='Autor do post' value={autor} onChange={(e) => setAutor(e.target.value)} /> <br />
 
-        <button onClick={handleAdd}>Cadastrar</button> <br/>
+        <button onClick={handleAdd}>Cadastrar</button> <br />
 
-        <button onClick={buscarPosts}>Buscar postes</button> <br/>
+        <button onClick={buscarPosts}>Buscar postes</button> <br />
 
         <button onClick={editarPost}>Atualizar post</button>
 
         <ul>
-          {posts.map((post) =>{
-            return(
+          {posts.map((post) => {
+            return (
               <li key={post.id}>
-                <strong>ID: {post.id}</strong> <br/>
-                <span>Titulo: {post.titulo}</span> <br/>
-                <span>Autor: {post.autor}</span> <br/>
-                <button onClick={() => excluirPost(post.id)}>Excluir</button> <br/> <br/>
+                <strong>ID: {post.id}</strong> <br />
+                <span>Titulo: {post.titulo}</span> <br />
+                <span>Autor: {post.autor}</span> <br />
+                <button onClick={() => excluirPost(post.id)}>Excluir</button> <br /> <br />
               </li>
             )
           })}
