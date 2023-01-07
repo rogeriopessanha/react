@@ -66,6 +66,12 @@ function App() {
         if (user) {
           //se tem usuario logado ele entra aqui
           console.log(user)
+          setUser(true)
+          setUserDetail({
+            uid: user.uid,
+            email: user.email
+          })
+          
         }else{
           //se nao possui nenhum user logado
           setUser(false)
@@ -75,7 +81,7 @@ function App() {
     }
 
     checkLogin()
-    
+
   }, [])
 
   async function handleAdd() {
