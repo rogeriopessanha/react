@@ -28,7 +28,9 @@ export default function Admin() {
                 const data = JSON.parse(userDetail)
 
                 const tarefaRef = collection(db, "tarefas")
-                const q = query(tarefaRef, orderBy, ('created', 'desc'), where('userUid', '==', data?.uid))
+                
+                const q = query(tarefaRef, orderBy('created', 'desc'), where('userUid', '==', data?.uid))
+                
                 const unsub = onSnapshot(q, (snapshot) => {
                     let lista = []
 
