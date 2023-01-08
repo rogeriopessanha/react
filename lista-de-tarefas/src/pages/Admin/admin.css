@@ -1,0 +1,74 @@
+
+.admin-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.admin-container h1{
+    margin-bottom: 28px;
+}
+
+.btn-registro{
+    margin-bottom: 28px;
+}
+
+.list{
+    width: 80%;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgba(186, 186, 186, 0.256);
+    border-radius: 4px;
+    margin-bottom: 12px;
+    padding: 18px;
+    align-items: center;
+}
+
+.list p{
+    margin-bottom: 8px;
+}
+
+.list button{
+    margin-right: 14px;
+    border: 0;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+
+.btn-editar{
+    color: #feaa34;
+    background-color: transparent;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+
+.btn-finalizar{
+    color: #96ff6d;
+    background-color: transparent;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.btn-logout{
+    position: absolute;
+    font-size: 18px;
+    bottom: 6%;
+    left: 4%;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    border: 0;
+    font-weight: 600;
+    background-color: #a32a2a;
+    color: #fff;
+    transition: all .5s;
+}
+
+.btn-logout:hover{
+    background-color: #ff0000;
+}
