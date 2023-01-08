@@ -7,13 +7,13 @@ import {getAuth} from 'firebase/auth'
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAsczaewzRlno2J0eGQ8imz8cplZTZP2II",
-  authDomain: "curso-97c69.firebaseapp.com",
-  projectId: "curso-97c69",
-  storageBucket: "curso-97c69.appspot.com",
-  messagingSenderId: "720478012982",
-  appId: "1:720478012982:web:c75a7fb1374e0b032b3a97",
-  measurementId: "G-E0WPM4B4J0"
+  apiKey: "AIzaSyCoievrqmvLVPQMIdc9CHNGcbKcL5FkLqE",
+  authDomain: "lista-de-tarefas-14a4c.firebaseapp.com",
+  projectId: "lista-de-tarefas-14a4c",
+  storageBucket: "lista-de-tarefas-14a4c.appspot.com",
+  messagingSenderId: "663561295809",
+  appId: "1:663561295809:web:c83c30f6c15fcacdcc0140",
+  measurementId: "G-1DFJPRC42G"
 };
 
   const firebaseApp = initializeApp(firebaseConfig)
