@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-top: 50px;
+    margin-top: 90px;
 }
 
 .admin-container h1{
@@ -11,7 +11,7 @@
 }
 
 .btn-registro{
-    margin-bottom: 28px;
+    margin-bottom: 16px;
 }
 
 .list{
@@ -56,13 +56,14 @@
     background: #161515;
 }
 
+
 .btn-logout{
     position: absolute;
     font-size: 18px;
-    bottom: 6%;
-    left: 4%;
-    height: 60px;
-    width: 60px;
+    top: 1%;
+    left: 1%;
+    height: 50px;
+    width: 50px;
     border-radius: 50%;
     border: 0;
     font-weight: 600;

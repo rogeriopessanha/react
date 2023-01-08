@@ -9,13 +9,18 @@ import {
     onSnapshot,
     query,
     orderBy,
-    where
+    where,
+    doc,
+    deleteDoc,
+    updateDoc
 } from 'firebase/firestore'
+import { async } from '@firebase/util'
 
 
 export default function Admin() {
     const [tarefaInput, setTarefaInput] = useState('')
     const [user, setUser] = useState ({})
+    const [edit, setEdit] = useState ({})
 
     const [tarefas, setTarefas] = useState([])
 
@@ -41,7 +46,7 @@ export default function Admin() {
                             userUid: doc.data().userUid
                         })
                     })
-                    console.log(lista)
+
                     setTarefas(lista)
                 })
             }
@@ -55,6 +60,11 @@ export default function Admin() {
 
         if (tarefaInput === '') {
             alert('Digite sua tarefa')
+            return
+        }
+
+        if (edit?.id) {
+            handleUpdateTarefa()
             return
         }
 
@@ -77,6 +87,34 @@ export default function Admin() {
         await signOut(auth)
     }
 
+    async function finalizarTarefa(id) {
+        const docRef = doc(db, 'tarefas', id)
+        await deleteDoc(docRef)
+    }
+
+    function editTarefa(item) {
+        setTarefaInput(item.tarefa)
+        setEdit(item)
+    }
+
+    async function handleUpdateTarefa() {
+        const docRef = doc(db, 'tarefas', edit?.id)
+        await updateDoc(docRef, {
+            tarefa: tarefaInput
+        })
+        .then(() =>{
+            console.log('tarefa atualizada')
+            setTarefaInput('')
+            setEdit({})
+        })
+        .catch(() =>{
+            console.log("erro ao atualizar")
+            setTarefaInput('')
+            setEdit({})
+        })
+        
+    }
+
 
     return(
         <div className="admin-container">
@@ -85,17 +123,24 @@ export default function Admin() {
             <form className="form" onSubmit={handleRegistro}>
                 <textarea placeholder='Escreva sua tarefa' value={tarefaInput} onChange={(e) => setTarefaInput(e.target.value)} />
 
-                <button className="btn-registro" type='submit'>Registrar tarefa</button>
+                {Object.keys(edit).length > 0 ?(
+                    <button className="btn-registro" style={{backgroundColor: '#e28605'}} type='submit'>Atualizar tarefa</button>
+                ) : (
+                    <button className="btn-registro" type='submit'>Registrar tarefa</button>
+                )}
             </form>
 
-            <article className="list">
-                <p>liuhdsudsai diuhsiudhasiduh iushdiuashdiusah diuhasihduasiu  </p>
+            {tarefas.map((item) => (
+                <article key ={item.id} className="list">
+                <p>{item.tarefa}</p>
 
                <div>
-                <button className="btn-editar">Editar</button>
-                <button className="btn-finalizar">Finalizar</button>
+                <button onClick={() => editTarefa(item)} className="btn-editar">Editar</button>
+
+                <button onClick={ () => finalizarTarefa(item.id)} className="btn-finalizar">Finalizar</button>
                </div>
             </article>
+            ))}
 
             <button className="btn-logout" onClick={handleLogout}>Sair</button>
             
