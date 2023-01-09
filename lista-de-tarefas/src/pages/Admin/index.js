@@ -122,6 +122,7 @@ export default function Admin() {
 
             <form className="form" onSubmit={handleRegistro}>
                 <textarea placeholder='Escreva sua tarefa' value={tarefaInput} onChange={(e) => setTarefaInput(e.target.value)} />
+                
 
                 {Object.keys(edit).length > 0 ?(
                     <button className="btn-registro" style={{backgroundColor: '#e28605'}} type='submit'>Atualizar tarefa</button>
@@ -133,6 +134,7 @@ export default function Admin() {
             {tarefas.map((item) => (
                 <article key ={item.id} className="list">
                 <p>{item.tarefa}</p>
+                <hr/>
 
                <div>
                 <button onClick={() => editTarefa(item)} className="btn-editar">Editar</button>

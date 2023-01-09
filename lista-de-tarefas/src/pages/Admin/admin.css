@@ -28,11 +28,12 @@
 }
 
 .list p{
-    margin-bottom: 28px;
+    margin-bottom: 10px;
 }
 
 .list button{
-    margin-right: 10px;
+    margin-right: 20px;
+    margin-top: 20px;
     border: 0;
     border-radius: 4px;
     padding: 4px;
