@@ -1,12 +1,39 @@
 
+// import { useState } from 'react'
+// import Alunos from './components/Alunos'
+
+// import UserProvider from './contexts/user';
+
+// function App() {
+
+//   return (
+//     <UserProvider>
+//       <div>
+//         <h1>Escola</h1>
+//         <hr />
+//         <Alunos />
+//       </div>
+//     </UserProvider>
+//   );
+// }
+
+// export default App;
+
+import { useState } from 'react';
+import Alunos from './components/Alunos';
+
+import UserProvider from './contexts/user';
 
 function App() {
-  return (
-    <div className="App">
-     <h1>Context Api</h1>
 
-     
-    </div>
+  return (
+   <UserProvider>
+      <div>
+        <h1>ESCOLA</h1>
+        <hr/>
+        <Alunos/>
+      </div>
+    </UserProvider> 
   );
 }
 
