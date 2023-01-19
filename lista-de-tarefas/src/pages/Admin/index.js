@@ -124,10 +124,10 @@ export default function Admin() {
                 <textarea placeholder='Escreva sua tarefa' value={tarefaInput} onChange={(e) => setTarefaInput(e.target.value)} />
                 
 
-                {Object.keys(edit).length > 0 ?(
+               {Object.keys(edit).length > 0 ?(
                     <button className="btn-registro" style={{backgroundColor: '#e28605'}} type='submit'>Atualizar tarefa</button>
                 ) : (
-                    <button className="btn-registro" type='submit'>Registrar tarefa</button>
+                    <button ton className="btn-registro" type='submit'>Registrar tarefa</button>
                 )}
             </form>
 
