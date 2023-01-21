@@ -1,10 +1,22 @@
 
 import React from "react";
+import {Link} from 'react-router-dom'
+import logo from '../../assets/logo3.png'
+import './style.css'
 
 export default function Header() {
     return(
-        <header>
-            <h1>Header...</h1>
+        <header className="container">
+            <Link to='/'>
+            <img className="logo" src={logo} alt="logo do projeto" />
+            </Link>
+
+            <Link className="reserva" to='/reservas'>
+                <div>
+                    <strong>Minhas reservas</strong>
+                    <span>0 reservas</span>
+                </div>
+            </Link>
         </header>
     )
 }
