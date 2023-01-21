@@ -11,12 +11,12 @@ import store from './store';
 export default function App() {
   return (
 
-      <Provider store={store}>
-        <BrowserRouter>
-      <Header/>
-        <Routes/>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Header />
+        <Routes />
       </BrowserRouter>
-      </Provider>  
+    </Provider>
   );
 }
 
