@@ -1,28 +1,27 @@
-
 .title{
-    color: #fff
-}
-
-.reservas{
+    color: #FFF;
+  }
+  
+  .reservas{
     padding: 20px;
     margin-bottom: 10px;
-    background-color: #fff;
+    background: #FFF;
     border-radius: 4px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.reservas img{
+  }
+  
+  .reservas img{
     height: 100px;
-}
-
-.reservas button{
+  }
+  
+  .reservas button{
     border: 0;
-    background-color: #fff;
-}
-
-footer button{
+    background: #FFF;
+  }
+  
+  footer button{
     border: 0;
     display: flex;
     padding: 10px;
@@ -30,4 +29,4 @@ footer button{
     border-radius: 4px;
     margin-top: 10px;
     font-weight: bold;
-}
+  }
